@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.example.taco_cloud.Ingredient.Type;
 
 @Component
-public class IngredientByIdConverter implements Converter {
+public class IngredientByIdConverter implements Converter<String, Ingredient> {
     private Map<String, Ingredient> ingredientMap = new HashMap<>();
     public IngredientByIdConverter() {
         ingredientMap.put("TOHA", new Ingredient("TOHA", "Tortilla de harina", Type.MASA));
