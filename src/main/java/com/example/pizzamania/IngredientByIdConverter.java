@@ -1,4 +1,4 @@
-package com.example.pizza_cloud;
+package com.example.pizzamania;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import com.example.pizza_cloud.Ingredient.Type;
+import com.example.pizzamania.Ingredient.Type;
 
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {

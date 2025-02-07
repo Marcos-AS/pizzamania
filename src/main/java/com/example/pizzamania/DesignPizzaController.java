@@ -1,4 +1,4 @@
-package com.example.pizza_cloud;
+package com.example.pizzamania;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import com.example.pizza_cloud.Ingredient.Type;
+import com.example.pizzamania.Ingredient.Type;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import jakarta.validation.Valid;

@@ -1,4 +1,4 @@
-package com.example.pizza_cloud;
+package com.example.pizzamania;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;

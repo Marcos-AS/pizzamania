@@ -1,4 +1,4 @@
-package com.example.pizza_cloud;
+package com.example.pizzamania;
 
 import java.util.ArrayList;
 import java.util.List;

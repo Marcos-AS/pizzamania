@@ -1,13 +1,13 @@
-package com.example.pizza_cloud;
+package com.example.pizzamania;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PizzaCloudApplication {
+public class PizzamaniaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PizzaCloudApplication.class, args);
+		SpringApplication.run(PizzamaniaApplication.class, args);
 	}
 
 }
