@@ -1,4 +1,4 @@
-package com.example.taco_cloud;
+package com.example.pizza_cloud;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ public class Ingredient {
     private final Type type;
 
     public enum Type {
-        MASA, PROTEINA, VEGETAL, QUESO, SALSA
+        PROTEINA, VEGETAL, QUESO, FRUTA, EXTRA
     }
 }
 

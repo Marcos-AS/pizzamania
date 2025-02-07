@@ -1,4 +1,4 @@
-package com.example.taco_cloud;
+package com.example.pizza_cloud;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,6 @@ public class HomeControllerTest {
         mockMvc.perform(get("/"))
         .andExpect(status().isOk())
         .andExpect(view().name("home"))
-        .andExpect(content().string(containsString("Welcome to...")));
+        .andExpect(content().string(containsString("Pizzas y empanadas")));
     }
 }

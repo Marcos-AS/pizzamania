@@ -1,10 +1,10 @@
-package com.example.taco_cloud;
+package com.example.pizza_cloud;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TacoCloudApplicationTests {
+class PizzaCloudApplicationTests {
 
 	@Test
 	void contextLoads() {

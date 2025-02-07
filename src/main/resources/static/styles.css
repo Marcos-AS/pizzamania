@@ -1,0 +1,12 @@
+img {
+    width: 600px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns:500px 500px;
+}
+
+.validationError {
+    color: red;
+}
