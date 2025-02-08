@@ -8,6 +8,5 @@ public class PizzamaniaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PizzamaniaApplication.class, args);
-	}
-
+	}	
 }
