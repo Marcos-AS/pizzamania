@@ -1,8 +1,8 @@
 package com.example.pizzamania;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -21,41 +21,21 @@ import jakarta.validation.Valid;
 @SessionAttributes("pizzaOrder") //mantiene al objeto pizzaOrder durante la sesión
 public class DesignPizzaController {
 
+    private final IngredientRepository ingredientRepo;
+
+    @Autowired
+    public DesignPizzaController(IngredientRepository ingredientRepo) {
+        this.ingredientRepo = ingredientRepo;
+    }
+
     //los métodos con @ModelAttribute se invocan cuando se maneja una petición
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
-        List<Ingredient> ingredients = Arrays.asList(
-            new Ingredient("QUMO", "Queso Mozzarella", Type.QUESO),
-            new Ingredient("QUPR", "Queso Provolone", Type.QUESO),
-            new Ingredient("QUPA", "Queso Parmesano", Type.QUESO),
-            new Ingredient("QURO", "Queso Roquefort", Type.QUESO),
-            new Ingredient("QUCA", "Queso de cabra", Type.QUESO),
-            new Ingredient("PRPO", "Pollo", Type.PROTEINA),
-            new Ingredient("PRPA", "Panceta", Type.PROTEINA),
-            new Ingredient("PRAN", "Anchoas", Type.PROTEINA),
-            new Ingredient("PRCP", "Carne picada", Type.PROTEINA),
-            new Ingredient("PRHU", "Huevo", Type.PROTEINA),
-            new Ingredient("VECE", "Cebolla", Type.VEGETAL),
-            new Ingredient("VETP", "Tomate perita", Type.VEGETAL),
-            new Ingredient("VETC", "Tomate cherry", Type.VEGETAL),
-            new Ingredient("VERU", "Rúcula", Type.VEGETAL),
-            new Ingredient("VEES", "Espinaca", Type.VEGETAL),
-            new Ingredient("VEBE", "Berenjena", Type.VEGETAL),
-            new Ingredient("VEZU", "Zucchini", Type.VEGETAL),
-            new Ingredient("VECH", "Choclo", Type.VEGETAL),
-            new Ingredient("FRAN", "Ananá", Type.FRUTA),
-            new Ingredient("FRMA", "Manzana", Type.FRUTA),
-            new Ingredient("EXOR", "Orégano", Type.EXTRA),
-            new Ingredient("EXAJ", "Ají molido", Type.EXTRA),
-            new Ingredient("EXAO", "Aceite de oliva", Type.EXTRA),
-            new Ingredient("EXMI", "Miel", Type.EXTRA),
-            new Ingredient("EXNU", "Nueces", Type.EXTRA)
-        );
-
+        Iterable<Ingredient> ingredients = ingredientRepo.findAll();
         Type[] types = Ingredient.Type.values();
         for (Type type: types) {
             model.addAttribute(type.toString().toLowerCase(),
-                             filterByType(ingredients, type));
+                             filterByType((List<Ingredient>) ingredients, type));
             //agrega los ingredientes como atributo del obj Model al que
             //tiene acceso la vista (servlet request)
         }
