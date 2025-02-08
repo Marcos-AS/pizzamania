@@ -7,13 +7,14 @@ import java.util.List;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Digits;
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.springframework.data.annotation.Id;
 import lombok.Data;
 
 @Data
@@ -24,8 +25,6 @@ public class PizzaOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-    private Date placedAt;
 
     @NotBlank(message="Se requiere un nombre")
     private String deliveryName;
@@ -39,19 +38,24 @@ public class PizzaOrder implements Serializable {
     @NotBlank(message="Se requiere una provincia")
     private String deliveryProvince;
 
+    @Column(name="delivery_CP")
     @NotBlank(message="Se requiere un código postal")
     private String deliveryCP;
 
     @CreditCardNumber(message="No es un número de tarjeta de crédito válido")
     private String ccNumber; 
 
-    @Pattern(regexp="^(0[1-9]|1[0-2]) ([\\/]) ([2-9][0-9])$", message="Debe tener formato MM/AA")
+    @Pattern(regexp="^(0[1-9]|1[0-2])/([2-9][0-9])$", message="Debe tener formato MM/AA")
     private String ccExpiration;
     
+    @Column(name="cc_cvv")
     @Digits(integer=3, fraction=0, message="CVV inválido")
     private String ccCVV;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @Column(name="placed_at")
+    private Date placedAt;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pizzaOrder")
     private List<Pizza> pizzas = new ArrayList<>();
 
     public void addPizza(Pizza pizza) {
