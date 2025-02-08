@@ -2,13 +2,14 @@ package com.example.pizzamania;
 
 import java.util.Date;
 import java.util.List;
-
-import org.springframework.data.annotation.Id;
 import lombok.Data;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -16,8 +17,8 @@ import jakarta.validation.constraints.Size;
 @Entity
 public class Pizza {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     private Long id;
 
     private Date createdAt = new Date();
@@ -29,6 +30,10 @@ public class Pizza {
     @Size(min=1, message="Debes elegir al menos 1 ingrediente")
     @ManyToMany
     private List<Ingredient> ingredients;
+
+    @ManyToOne
+    @JoinColumn(name = "pizza_order", nullable = false)
+    private PizzaOrder pizzaOrder;
 
     public void addIngredient(Ingredient ingredient) {
         this.ingredients.add(ingredient);

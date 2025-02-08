@@ -69,6 +69,7 @@ public class DesignPizzaController {
         if (errors.hasErrors()) {
             return "design";
         }
+        pizza.setPizzaOrder(pizzaOrder);
         pizzaOrder.addPizza(pizza);
         log.info("Processing pizza: {}", pizza); //el log es de SLF4J
         return "redirect:/orders/current";
