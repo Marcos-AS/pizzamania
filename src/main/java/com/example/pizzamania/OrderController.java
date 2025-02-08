@@ -16,6 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/orders")
 @SessionAttributes("pizzaOrder")
 public class OrderController {
+    private OrderRepository orderRepo;
+
+    public OrderController(OrderRepository orderRepo) {
+        this.orderRepo = orderRepo;
+    }
+
     @GetMapping("/current")
     public String orderForm() {
         return "orderForm";
@@ -29,7 +35,8 @@ public class OrderController {
         if (errors.hasErrors()) {
             return "orderForm";
         }
-        log.info("orden enviada: {}", order);        
+        orderRepo.save(order);
+        //log.info("orden enviada: {}", order);        
         sessionStatus.setComplete();
         return "redirect:/";
     }
