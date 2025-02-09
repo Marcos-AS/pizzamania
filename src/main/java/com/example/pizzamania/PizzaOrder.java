@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 // import jakarta.persistence.CascadeType;
@@ -17,21 +15,17 @@ import jakarta.validation.constraints.Pattern;
 // import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Digits;
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
-
-import com.datastax.oss.driver.api.core.uuid.Uuids;
-
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 
 @Data
-@Table("orders")
+@Document
 public class PizzaOrder implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    @PrimaryKey
-    private UUID id = Uuids.timeBased();
+    @Id
+    private String id;
 
     //@Column(name="placed_at")
     private Date placedAt;
@@ -64,14 +58,9 @@ public class PizzaOrder implements Serializable {
 
 
     //@OneToMany(cascade = CascadeType.ALL, mappedBy = "pizzaOrder")
-    @Column("pizzas")
-    private List<PizzaUDT> pizzas = new ArrayList<>();
+    private List<Pizza> pizzas = new ArrayList<>();
 
     public void addPizza(Pizza pizza) {
-        this.pizzas.add(toPizzaUDT(pizza));
-    }
-        
-    private PizzaUDT toPizzaUDT(Pizza pizza) {
-        return new PizzaUDT(pizza.getName(),pizza.getIngredients());
+        this.pizzas.add(pizza);
     }
 }

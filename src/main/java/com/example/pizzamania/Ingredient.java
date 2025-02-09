@@ -1,7 +1,8 @@
 package com.example.pizzamania;
 
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 // import jakarta.persistence.Entity;
 // import jakarta.persistence.EnumType;
 // import jakarta.persistence.Enumerated;
@@ -13,14 +14,14 @@ import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 
 @Data
+@Document
 @AllArgsConstructor
 //@RequiredArgsConstructor
 //no debe poder accederse, por eso PRIVATE y para setear props con final se usa force = true
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
-@Table("ingredients")
 public class Ingredient {
 
-    @PrimaryKey
+    @Id
     private String id;
 
     private String name;
