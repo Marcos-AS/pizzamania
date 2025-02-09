@@ -41,6 +41,12 @@ public class DesignPizzaController {
         }
     }
 
+    private Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
+        return ingredients
+                .stream()
+                .filter(x -> x.getType().equals(type))
+                .collect(Collectors.toList());
+    }
     
     @ModelAttribute(name = "pizzaOrder")
     public PizzaOrder order() {
@@ -67,18 +73,12 @@ public class DesignPizzaController {
         //como los checkboxes pueden ser varios seleccionados, el atr. es un List<Ingredient>
         //pero como no matchean los tipos hay que usar una clase Converter
         if (errors.hasErrors()) {
+            System.out.println(errors);
+            System.out.println("PIZZA: " + pizza);
             return "design";
         }
-        pizza.setPizzaOrder(pizzaOrder);
         pizzaOrder.addPizza(pizza);
         log.info("Processing pizza: {}", pizza); //el log es de SLF4J
         return "redirect:/orders/current";
-    }
-    
-    private Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
-        return ingredients
-                .stream()
-                .filter(x -> x.getType().equals(type))
-                .collect(Collectors.toList());
     }
 }
