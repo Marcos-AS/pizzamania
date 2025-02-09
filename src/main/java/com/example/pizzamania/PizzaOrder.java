@@ -4,28 +4,38 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+// import jakarta.persistence.CascadeType;
+// import jakarta.persistence.Column;
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
+// import jakarta.persistence.Id;
+// import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Digits;
 import org.hibernate.validator.constraints.CreditCardNumber;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
+
+import com.datastax.oss.driver.api.core.uuid.Uuids;
+
 import lombok.Data;
 
 @Data
-@Entity
+@Table("orders")
 public class PizzaOrder implements Serializable {
     private static final long serialVersionUID = 1L;
+    
+    @PrimaryKey
+    private UUID id = Uuids.timeBased();
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
+    //@Column(name="placed_at")
+    private Date placedAt;
+    
     @NotBlank(message="Se requiere un nombre")
     private String deliveryName;
 
@@ -38,7 +48,7 @@ public class PizzaOrder implements Serializable {
     @NotBlank(message="Se requiere una provincia")
     private String deliveryProvince;
 
-    @Column(name="delivery_CP")
+    //@Column(name="delivery_CP")
     @NotBlank(message="Se requiere un código postal")
     private String deliveryCP;
 
@@ -48,17 +58,20 @@ public class PizzaOrder implements Serializable {
     @Pattern(regexp="^(0[1-9]|1[0-2])/([2-9][0-9])$", message="Debe tener formato MM/AA")
     private String ccExpiration;
     
-    @Column(name="cc_cvv")
+    //@Column(name="cc_cvv")
     @Digits(integer=3, fraction=0, message="CVV inválido")
     private String ccCVV;
 
-    @Column(name="placed_at")
-    private Date placedAt;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pizzaOrder")
-    private List<Pizza> pizzas = new ArrayList<>();
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "pizzaOrder")
+    @Column("pizzas")
+    private List<PizzaUDT> pizzas = new ArrayList<>();
 
     public void addPizza(Pizza pizza) {
-        this.pizzas.add(pizza);
+        this.pizzas.add(toPizzaUDT(pizza));
+    }
+        
+    private PizzaUDT toPizzaUDT(Pizza pizza) {
+        return new PizzaUDT(pizza.getName(),pizza.getIngredients());
     }
 }
