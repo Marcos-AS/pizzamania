@@ -1,4 +1,6 @@
-package com.example.pizzamania;
+package com.example.pizzamania.udts;
+
+import com.example.pizzamania.Ingredient;
 
 import lombok.AccessLevel;
 import lombok.Data;

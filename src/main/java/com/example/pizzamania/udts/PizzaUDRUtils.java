@@ -1,4 +1,6 @@
-package com.example.pizzamania;
+package com.example.pizzamania.udts;
+
+import com.example.pizzamania.Ingredient;
 
 public class PizzaUDRUtils {
     public static IngredientUDT toIngredientUDT(Ingredient ingredient) {

@@ -1,13 +1,18 @@
-package com.example.pizzamania;
+package com.example.pizzamania.controllers;
 
 import java.util.Date;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+
+import com.example.pizzamania.PizzaOrder;
+import com.example.pizzamania.User;
+import com.example.pizzamania.repositories.OrderRepository;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +36,8 @@ public class OrderController {
 
     @PostMapping
     public String processOrder(@Valid PizzaOrder order, Errors errors,
-                                SessionStatus sessionStatus) {
+                                SessionStatus sessionStatus,
+                                @AuthenticationPrincipal User user) {
         //el objeto PizzaOrder que se mantiene con SessionAttributes
         //al llamar a setComplete, se limpia la sesión y queda lista para una nueva orden
         //System.out.println("ORDER: " + order);
@@ -39,6 +45,7 @@ public class OrderController {
             return "orderForm";
         }
         order.setPlacedAt(new Date());
+        order.setUser(user);
         orderRepo.save(order);
         //log.info("orden enviada: {}", order);        
         sessionStatus.setComplete();

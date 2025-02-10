@@ -1,4 +1,4 @@
-package com.example.pizzamania;
+package com.example.pizzamania.controllers;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,7 +10,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.example.pizzamania.Ingredient;
+import com.example.pizzamania.Pizza;
+import com.example.pizzamania.PizzaOrder;
 import com.example.pizzamania.Ingredient.Type;
+import com.example.pizzamania.repositories.IngredientRepository;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import jakarta.validation.Valid;
@@ -73,10 +79,11 @@ public class DesignPizzaController {
         //como los checkboxes pueden ser varios seleccionados, el atr. es un List<Ingredient>
         //pero como no matchean los tipos hay que usar una clase Converter
         if (errors.hasErrors()) {
-            System.out.println(errors);
-            System.out.println("PIZZA: " + pizza);
+            // System.out.println(errors);
+            // System.out.println("PIZZA: " + pizza);
             return "design";
         }
+        pizza.setPizzaOrder(pizzaOrder);
         pizzaOrder.addPizza(pizza);
         log.info("Processing pizza: {}", pizza); //el log es de SLF4J
         return "redirect:/orders/current";

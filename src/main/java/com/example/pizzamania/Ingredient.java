@@ -1,12 +1,9 @@
 package com.example.pizzamania;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-// import jakarta.persistence.Entity;
-// import jakarta.persistence.EnumType;
-// import jakarta.persistence.Enumerated;
-// import jakarta.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 
 @Data
-@Document
+@Entity
 @AllArgsConstructor
 //@RequiredArgsConstructor
 //no debe poder accederse, por eso PRIVATE y para setear props con final se usa force = true
@@ -26,7 +23,7 @@ public class Ingredient {
 
     private String name;
 
-    //@Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Type type;
 
     public enum Type {

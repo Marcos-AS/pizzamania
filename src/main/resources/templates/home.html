@@ -5,8 +5,18 @@
     <link rel="stylesheet" th:href="@{/styles.css}">
   </head>
   <body>
+    <button><a href="/login">Iniciar sesión</a></button>
+    <form method="POST" th:action="@{/logout}">
+      <input type="submit" value="Logout"/>
+    </form>
     <h1>Pizzas y empanadas: Pizzamanía</h1>
-    <!-- thymeleaf -->
+    <div th:if="${name!=null}">
+      <h2>Bienvenido, <span th:text="${name}"></span></h2>
+      <div th:if="${email!=null and picture!=null}">        
+        <p>Email: <span th:text="${email}"></span></p>
+        <img th:src="${picture}" alt="Foto de perfil">
+      </div>
+    </div>
     <img th:src="@{/images/pizza.jpg}" />
     <p>
       <a href="/crear">Diseña tu pizza &lt;-----</a> 

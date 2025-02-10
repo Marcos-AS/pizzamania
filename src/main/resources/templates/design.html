@@ -44,7 +44,7 @@
                   <span th:text="${ingredient.name}">INGREDIENTE</span><br/>
                 </div>          
             </div>
-
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
         </div>
         <div>
             <h3>Nombra a tu pizza:</h3>

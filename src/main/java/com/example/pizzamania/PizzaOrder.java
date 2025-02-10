@@ -6,28 +6,27 @@ import java.util.Date;
 import java.util.List;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-// import jakarta.persistence.CascadeType;
-// import jakarta.persistence.Column;
-// import jakarta.persistence.Entity;
-// import jakarta.persistence.GeneratedValue;
-// import jakarta.persistence.GenerationType;
-// import jakarta.persistence.Id;
-// import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Digits;
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.Data;
 
 @Data
-@Document
+@Entity
 public class PizzaOrder implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    //@Column(name="placed_at")
     private Date placedAt;
     
     @NotBlank(message="Se requiere un nombre")
@@ -42,7 +41,6 @@ public class PizzaOrder implements Serializable {
     @NotBlank(message="Se requiere una provincia")
     private String deliveryProvince;
 
-    //@Column(name="delivery_CP")
     @NotBlank(message="Se requiere un código postal")
     private String deliveryCP;
 
@@ -52,13 +50,15 @@ public class PizzaOrder implements Serializable {
     @Pattern(regexp="^(0[1-9]|1[0-2])/([2-9][0-9])$", message="Debe tener formato MM/AA")
     private String ccExpiration;
     
-    //@Column(name="cc_cvv")
     @Digits(integer=3, fraction=0, message="CVV inválido")
     private String ccCVV;
 
 
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "pizzaOrder")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pizzaOrder")
     private List<Pizza> pizzas = new ArrayList<>();
+
+    @ManyToOne
+    private User user;
 
     public void addPizza(Pizza pizza) {
         this.pizzas.add(pizza);
