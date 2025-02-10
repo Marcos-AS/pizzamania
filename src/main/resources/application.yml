@@ -1,0 +1,36 @@
+spring:
+    application:
+        name: pizzamania
+    datasource:
+        generate-unique-name: false
+        name: pizzamania
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        clientId: ${GOOGLE_CLIENT_ID}
+                        clientSecret: ${GOOGLE_CLIENT_SECRET}
+                        scope: email, public_profile
+    sql:
+        init:
+            encoding: UTF-8
+    h2:
+        console:
+            enabled: true
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+    cassandra:
+        keyspace-name: pizzamania
+        schema-action: CREATE_IF_NOT_EXISTS
+        local-datacenter: datacenter1
+        contact-points: localhost:9042
+        connection:
+            connect-timeout: 5s
+            init-query-timeout: 5s
+server:
+    servlet:
+        encoding:
+            charset: UTF-8
