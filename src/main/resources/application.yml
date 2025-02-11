@@ -34,3 +34,16 @@ server:
     servlet:
         encoding:
             charset: UTF-8
+    port: 8443
+    ssl:
+        key-store: file:./mykeys.jks
+        key-store-password: ${KEYSTORE_PASSWORD}
+        key-password: ${KEY_PASSWORD}
+# logging:
+#     file:
+#         name: ./var/logs/pizzamania.log
+#     level:
+#         root: WARN
+#         org:
+#             springframework:
+#                 security: DEBUG

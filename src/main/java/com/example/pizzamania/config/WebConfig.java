@@ -1,4 +1,4 @@
-package com.example.pizzamania;
+package com.example.pizzamania.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;

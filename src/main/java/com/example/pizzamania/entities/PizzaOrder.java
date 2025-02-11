@@ -1,4 +1,4 @@
-package com.example.pizzamania;
+package com.example.pizzamania.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;

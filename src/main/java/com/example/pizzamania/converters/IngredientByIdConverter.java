@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import com.example.pizzamania.Ingredient;
+import com.example.pizzamania.entities.Ingredient;
 import com.example.pizzamania.repositories.IngredientRepository;
 
 @Component

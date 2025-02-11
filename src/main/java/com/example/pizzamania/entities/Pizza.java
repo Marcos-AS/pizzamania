@@ -1,4 +1,4 @@
-package com.example.pizzamania;
+package com.example.pizzamania.entities;
 
 import java.util.Date;
 import java.util.List;

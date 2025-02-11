@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.example.pizzamania.PizzaOrder;
-import com.example.pizzamania.User;
+import com.example.pizzamania.entities.PizzaOrder;
+import com.example.pizzamania.entities.User;
 import com.example.pizzamania.repositories.OrderRepository;
 
 import jakarta.validation.Valid;

@@ -1,4 +1,4 @@
-package com.example.pizzamania;
+package com.example.pizzamania.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

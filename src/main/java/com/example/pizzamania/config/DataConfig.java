@@ -1,10 +1,11 @@
-package com.example.pizzamania;
+package com.example.pizzamania.config;
 
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.example.pizzamania.Ingredient.Type;
+import com.example.pizzamania.entities.Ingredient;
+import com.example.pizzamania.entities.Ingredient.Type;
 import com.example.pizzamania.repositories.IngredientRepository;
 
 @Configuration

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.example.pizzamania.Ingredient;
-import com.example.pizzamania.Pizza;
-import com.example.pizzamania.PizzaOrder;
-import com.example.pizzamania.Ingredient.Type;
+import com.example.pizzamania.entities.Ingredient;
+import com.example.pizzamania.entities.Pizza;
+import com.example.pizzamania.entities.PizzaOrder;
+import com.example.pizzamania.entities.Ingredient.Type;
 import com.example.pizzamania.repositories.IngredientRepository;
 
 import lombok.extern.slf4j.Slf4j;

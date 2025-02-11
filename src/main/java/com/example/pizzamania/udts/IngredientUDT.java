@@ -1,6 +1,6 @@
 package com.example.pizzamania.udts;
 
-import com.example.pizzamania.Ingredient;
+import com.example.pizzamania.entities.Ingredient;
 
 import lombok.AccessLevel;
 import lombok.Data;

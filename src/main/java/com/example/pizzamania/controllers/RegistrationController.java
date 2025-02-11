@@ -1,10 +1,11 @@
 package com.example.pizzamania.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.pizzamania.RegistrationForm;
+import com.example.pizzamania.entities.RegistrationForm;
 import com.example.pizzamania.repositories.UserRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ public class RegistrationController {
     private UserRepository userRepo;
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
     public RegistrationController(UserRepository userRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
